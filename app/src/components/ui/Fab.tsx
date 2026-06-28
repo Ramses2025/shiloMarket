@@ -5,7 +5,7 @@ export function Fab({ onClick }: { onClick?: () => void }) {
     <button
       onClick={onClick}
       aria-label="Publier"
-      className="fixed bottom-20 right-4 z-30 grid h-14 w-14 place-items-center rounded-full bg-primary text-white shadow-fab lg:hidden"
+      className="fixed bottom-20 right-4 z-30 grid h-14 w-14 place-items-center rounded-full bg-primary text-white shadow-fab xl:hidden"
     >
       <PenSquare size={24} />
     </button>

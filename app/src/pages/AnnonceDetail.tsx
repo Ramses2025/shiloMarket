@@ -22,7 +22,7 @@ export default function AnnonceDetail() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-content pb-24 lg:pb-8">
+    <div className="mx-auto w-full max-w-content pb-24 xl:pb-8">
       <header className="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-3 py-2 backdrop-blur">
         <button onClick={() => navigate(-1)} className="btn-ghost text-ink">
           <ArrowLeft size={22} />
@@ -44,7 +44,7 @@ export default function AnnonceDetail() {
         )}
       </div>
 
-      <div className="px-4 pt-3 lg:grid lg:grid-cols-[1fr_320px] lg:gap-6">
+      <div className="px-4 pt-3 xl:grid xl:grid-cols-[1fr_320px] xl:gap-6">
         <div>
           {annonce.certified && <CertifiedTag />}
           <h1 className="mt-2 text-2xl font-extrabold">{annonce.title}</h1>
@@ -83,7 +83,7 @@ export default function AnnonceDetail() {
         </div>
 
         {/* Actions desktop */}
-        <aside className="hidden lg:block">
+        <aside className="hidden xl:block">
           <div className="card sticky top-20 space-y-2 p-4">
             <button onClick={() => navigate('/messages/c1')} className="btn-primary w-full">
               <MessageCircle size={18} /> Discuter
@@ -95,7 +95,7 @@ export default function AnnonceDetail() {
       </div>
 
       {/* Barre d'action collée (mobile) */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-2 border-t border-line bg-white p-3 safe-bottom lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-2 border-t border-line bg-white p-3 safe-bottom xl:hidden">
         <button onClick={() => navigate('/messages/c1')} className="btn-primary h-12 flex-1">
           <MessageCircle size={18} /> Discuter
         </button>

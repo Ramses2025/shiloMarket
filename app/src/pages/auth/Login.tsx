@@ -32,9 +32,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-white lg:grid lg:grid-cols-2">
+    <div className="min-h-screen bg-white xl:grid xl:grid-cols-2">
       {/* Branding (desktop) */}
-      <div className="hidden lg:flex flex-col justify-center gap-6 bg-gradient-to-br from-primary to-primary-dark p-12 text-white">
+      <div className="hidden xl:flex flex-col justify-center gap-6 bg-gradient-to-br from-primary to-primary-dark p-12 text-white">
         <LogoMark size={64} />
         <h1 className="text-4xl font-extrabold leading-tight">ShiloMarket</h1>
         <p className="text-lg text-white/90">
@@ -48,7 +48,7 @@ export default function Login() {
           <ArrowLeft size={22} />
         </button>
 
-        <div className="mt-4 flex justify-center lg:hidden">
+        <div className="mt-4 flex justify-center xl:hidden">
           <LogoMark size={64} />
         </div>
 

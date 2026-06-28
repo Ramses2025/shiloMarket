@@ -45,14 +45,14 @@ export default function Shorts() {
         <button
           onClick={prev}
           aria-label="Short précédent"
-          className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 lg:block"
+          className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 xl:block"
         >
           <ChevronUp size={22} />
         </button>
         <button
           onClick={next}
           aria-label="Short suivant"
-          className="absolute right-1/2 top-1/2 hidden translate-x-[140px] -translate-y-1/2 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 lg:block"
+          className="absolute right-1/2 top-1/2 hidden translate-x-[140px] -translate-y-1/2 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 xl:block"
         >
           <ChevronDown size={22} />
         </button>

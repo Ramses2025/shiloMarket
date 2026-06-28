@@ -11,7 +11,7 @@ const items = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white safe-bottom lg:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white safe-bottom xl:hidden">
       <ul className="mx-auto flex max-w-content items-center justify-around">
         {items.map(({ to, label, icon: Icon, end }) => (
           <li key={to} className="flex-1">

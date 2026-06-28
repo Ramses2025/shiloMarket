@@ -13,7 +13,7 @@ const items = [
 export function Sidebar() {
   const navigate = useNavigate()
   return (
-    <aside className="hidden h-full w-60 shrink-0 flex-col overflow-y-auto border-r border-line bg-white px-4 py-5 lg:flex">
+    <aside className="hidden h-full w-60 shrink-0 flex-col overflow-y-auto border-r border-line bg-white px-4 py-5 xl:flex">
       <div className="flex items-center gap-2 px-2">
         <LogoMark size={36} />
         <LogoText />

@@ -31,7 +31,7 @@ export function InstallPrompt() {
   if (!deferredPrompt || dismissed) return null
 
   return (
-    <div className="fixed bottom-20 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 items-center gap-3 rounded-2xl bg-white p-3 shadow-card lg:bottom-6">
+    <div className="fixed bottom-20 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 items-center gap-3 rounded-2xl bg-white p-3 shadow-card xl:bottom-6">
       <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary text-white">
         <Download size={22} />
       </div>
