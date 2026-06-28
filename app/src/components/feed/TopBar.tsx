@@ -1,14 +1,19 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, Bell, Menu } from 'lucide-react'
 import { LogoText } from '../ui/Logo'
+import { SideMenu } from '../layout/SideMenu'
 
 const UNREAD_NOTIF_COUNT = 3
 
 export function TopBar() {
   const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
   const hasUnread = UNREAD_NOTIF_COUNT > 0
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white/95 px-4 py-3 backdrop-blur xl:hidden">
+    <>
+    <SideMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+    <header className="safe-top sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white/95 px-4 py-3 backdrop-blur xl:hidden">
       <button onClick={() => navigate('/')} aria-label="Accueil">
         <LogoText />
       </button>
@@ -31,13 +36,14 @@ export function TopBar() {
           )}
         </button>
         <button
-          onClick={() => navigate('/parametres')}
+          onClick={() => setMenuOpen(true)}
           className="grid h-11 w-11 place-items-center rounded-full bg-soft"
-          aria-label="Paramètres"
+          aria-label="Menu"
         >
           <Menu size={20} />
         </button>
       </div>
     </header>
+    </>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Search, SlidersHorizontal, Star, PenSquare, Check } from 'lucide-react'
+import { Search, SlidersHorizontal, Star, Check } from 'lucide-react'
 import { MARKETPLACE_FILTERS } from '../constants'
 import { AnnonceGridCard } from '../components/marketplace/AnnonceGridCard'
 import { GridCardSkeleton } from '../components/ui/Skeleton'
@@ -31,14 +31,20 @@ export default function Marketplace() {
     return () => clearTimeout(t)
   }, [])
 
+  useEffect(() => {
+    const cat = (params.get('cat') as FilterKey) || 'all'
+    const q = params.get('q') || ''
+    setChipFilter(cat)
+    setQuery(q)
+  }, [params])
+
   const filtered = useMemo(() => {
-    let result = annonces.filter((a) => {
+    const matchFilters = (a: typeof annonces[number]) => {
       const okCat = chipFilter === 'all' || a.category === (chipFilter as Category)
       const okQuery =
         !query ||
         a.title.toLowerCase().includes(query.toLowerCase()) ||
         a.location.toLowerCase().includes(query.toLowerCase())
-
       const okAdvCat = filters.categories.size === 0 || filters.categories.has(a.category)
       const okTransaction = filters.transaction === 'all' || a.transaction === filters.transaction
       const okLocation = !filters.location || a.location.toLowerCase().includes(filters.location.toLowerCase())
@@ -47,9 +53,10 @@ export default function Marketplace() {
       const okPrice = a.price >= min && a.price <= max
       const okCertified = !filters.certifiedOnly || a.certified
       const okAvailable = !filters.availableOnly || a.available
-
       return okCat && okQuery && okAdvCat && okTransaction && okLocation && okPrice && okCertified && okAvailable
-    })
+    }
+
+    const result = annonces.filter(matchFilters)
 
     const sorted = [...result]
     switch (sort) {
@@ -70,7 +77,7 @@ export default function Marketplace() {
   }, [annonces, chipFilter, query, filters, sort])
 
   const filteredCertified = useMemo(() => {
-    return certified.filter((a) => {
+    const matchFilters = (a: typeof certified[number]) => {
       const okCat = chipFilter === 'all' || a.category === (chipFilter as Category)
       const okQuery =
         !query ||
@@ -84,7 +91,8 @@ export default function Marketplace() {
       const okPrice = a.price >= min && a.price <= max
       const okAvailable = !filters.availableOnly || a.available
       return okCat && okQuery && okAdvCat && okTransaction && okLocation && okPrice && okAvailable
-    })
+    }
+    return certified.filter(matchFilters)
   }, [certified, chipFilter, query, filters])
 
   const activeFilterCount =
@@ -98,30 +106,22 @@ export default function Marketplace() {
 
   return (
     <div className="flex h-full overflow-hidden">
-      <div className="h-full flex-1 overflow-y-auto pb-20 xl:pb-4">
-        <header className="sticky top-0 z-30 border-b border-line bg-white px-4 py-3">
+      <div className="h-full flex-1 overflow-y-auto pb-16 xl:pb-4">
+        <header className="safe-top sticky top-0 z-30 border-b border-line bg-white px-4 py-3">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-extrabold text-primary">Marketplace</h1>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => navigate('/publier')}
-                className="btn-primary h-10 px-4 text-sm"
-              >
-                <PenSquare size={16} /> Publier
-              </button>
-              <button
-                onClick={() => setShowFilters(true)}
-                className="relative grid h-10 w-10 place-items-center rounded-full bg-soft"
-                aria-label="Filtres avancés"
-              >
-                <SlidersHorizontal size={20} />
-                {activeFilterCount > 0 && (
-                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-xs font-bold text-white">
-                    {activeFilterCount}
-                  </span>
-                )}
-              </button>
-            </div>
+            <h1 className="text-2xl font-extrabold text-ink">Marketplace</h1>
+            <button
+              onClick={() => setShowFilters(true)}
+              className="relative grid h-10 w-10 place-items-center rounded-full bg-soft"
+              aria-label="Filtres avancés"
+            >
+              <SlidersHorizontal size={20} />
+              {activeFilterCount > 0 && (
+                <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-xs font-bold text-white">
+                  {activeFilterCount}
+                </span>
+              )}
+            </button>
           </div>
           <div className="field mt-3 h-12">
             <Search size={20} className="text-muted" />

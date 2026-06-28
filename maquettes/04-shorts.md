@@ -119,3 +119,25 @@ Desktop
 │            │            ▼                   │
 └────────────┴───────────────────────────────┘
 ```
+
+---
+
+## 7. Statut d'implémentation (mise à jour)
+
+### Lecteur Shorts — ✅ Implémenté (`pages/Shorts.tsx`)
+- **Plein écran 9:16** : image poster en fond, dégradé sombre en bas.
+- **Rail d'actions droite** : like (cœur), commentaires, partage, suivre, contacter.
+- **Like** : toggle animé avec compteur, mise à jour via `DataContext`.
+- **Suivre** : toggle via `DataContext` + toast de confirmation.
+- **Contacter** : **corrigé** — crée une conversation via `MessageContext.createConversation()` avec la page du Short, puis navigue vers `/messages/{convoId}` (au lieu d'utiliser `annonceId` incorrectement).
+- **Auteur + description** : en bas à gauche, tags catégorie et localisation.
+- **Navigation** : scroll vertical snap, flèches ▲▼ sur desktop.
+- **Lazy loading** : `React.lazy()` pour le composant Shorts.
+
+### Création d'un Short — ⚠️ Non implémenté
+- Formulaire de création prévu dans la maquette mais non codé (phase démo).
+
+### PageDetail — Onglet Shorts — ✅ Implémenté (`pages/PageDetail.tsx`)
+- Affiche les Shorts réels filtrés par `page.id` (grille 2 colonnes avec poster, légende, compteur likes).
+- Navigation vers `/shorts` au clic.
+- Message « Aucun Short publié » si la page n'a pas de Shorts.

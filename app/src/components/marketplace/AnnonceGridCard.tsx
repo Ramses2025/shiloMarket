@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { MapPin, Bookmark, Video } from 'lucide-react'
 import type { Annonce } from '../../types'
-import { formatPrice } from '../../lib/format'
+import { formatPrice, handleImageError } from '../../lib/format'
 import { CertifiedTag } from '../ui/Badges'
 import { useData } from '../../context/DataContext'
 import { useToast } from '../../context/ToastContext'
@@ -14,13 +14,14 @@ export function AnnonceGridCard({ annonce }: { annonce: Annonce }) {
   return (
     <div
       onClick={() => navigate(`/annonce/${annonce.id}`)}
-      className="card cursor-pointer overflow-hidden text-left"
+      className="card cursor-pointer overflow-hidden text-left transition active:scale-[0.98]"
     >
       <div className="relative">
         <img
           src={annonce.images[0]}
           alt={annonce.title}
           loading="lazy"
+          onError={handleImageError}
           className="aspect-[4/3] w-full object-cover"
         />
         {annonce.certified && (

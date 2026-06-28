@@ -18,14 +18,14 @@ import { ACCOUNT_TYPE_LABEL } from '../constants'
 import { useToast } from '../context/ToastContext'
 
 const MENU = [
-  { icon: Package, label: 'Mes annonces' },
-  { icon: Building2, label: 'Mes pages' },
-  { icon: Bookmark, label: 'Enregistrés' },
-  { icon: PlayCircle, label: 'Mes Shorts' },
-  { icon: Bell, label: 'Notifications' },
-  { icon: CreditCard, label: 'Paiements & abonnements' },
+  { icon: Package, label: 'Mes annonces', link: '/mes-annonces' },
+  { icon: Building2, label: 'Mes pages', link: '/page/p1' },
+  { icon: Bookmark, label: 'Enregistrés', link: '/enregistres' },
+  { icon: PlayCircle, label: 'Mes Shorts', link: '/shorts' },
+  { icon: Bell, label: 'Notifications', link: '/notifications' },
+  { icon: CreditCard, label: 'Paiements & abonnements', link: '/paiements' },
   { icon: Settings, label: 'Paramètres', link: '/parametres' },
-  { icon: HelpCircle, label: 'Aide & support' },
+  { icon: HelpCircle, label: 'Aide & support', link: '/aide' },
 ]
 
 export default function Profile() {
@@ -36,7 +36,7 @@ export default function Profile() {
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center px-8 text-center">
+      <div className="safe-top flex min-h-[70vh] flex-col items-center justify-center px-8 text-center">
         <span className="grid h-24 w-24 place-items-center rounded-full bg-primary-light text-primary">
           <UserIcon size={44} />
         </span>
@@ -52,9 +52,9 @@ export default function Profile() {
   }
 
   return (
-    <div className="h-full overflow-y-auto pb-20 xl:pb-4">
-      <header className="border-b border-line bg-white px-4 py-3">
-        <h1 className="text-2xl font-extrabold text-primary">Profil</h1>
+    <div className="h-full overflow-y-auto pb-16 xl:pb-4">
+      <header className="safe-top border-b border-line bg-white px-4 py-3">
+        <h1 className="text-2xl font-extrabold text-ink">Profil</h1>
       </header>
 
       <div className="flex flex-col items-center px-4 py-6 text-center">
@@ -63,7 +63,7 @@ export default function Profile() {
         <p className="text-sm text-muted">
           {ACCOUNT_TYPE_LABEL[user.accountType]} · {user.phone}
         </p>
-        <button onClick={() => show('Modification du profil bientôt disponible')} className="btn-outline mt-3 h-10">Modifier</button>
+        <button onClick={() => navigate('/profil/modifier')} className="btn-outline mt-3 h-10">Modifier</button>
       </div>
 
       <div className="mx-4 grid grid-cols-3 divide-x divide-line rounded-2xl bg-white py-3 text-center shadow-card">
@@ -77,7 +77,7 @@ export default function Profile() {
           <li key={label}>
             <button
               onClick={() => link && navigate(link)}
-              className="flex w-full items-center gap-3 px-4 py-3.5 text-left hover:bg-soft"
+              className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition active:scale-[0.98] hover:bg-soft"
             >
               <Icon size={20} className="text-ink" />
               <span className="flex-1 font-medium">{label}</span>
@@ -91,7 +91,7 @@ export default function Profile() {
               logout()
               navigate('/')
             }}
-            className="flex w-full items-center gap-3 px-4 py-3.5 text-left text-live hover:bg-soft"
+            className="flex w-full items-center gap-3 px-4 py-3.5 text-left text-live transition active:scale-[0.98] hover:bg-soft"
           >
             <LogOut size={20} />
             <span className="flex-1 font-medium">Déconnexion</span>

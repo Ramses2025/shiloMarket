@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { handleImageError } from '../../lib/format'
 
 export function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   const [index, setIndex] = useState(0)
@@ -21,6 +22,7 @@ export function ImageCarousel({ images, alt }: { images: string[]; alt: string }
         src={images[index]}
         alt={alt}
         loading="lazy"
+        onError={handleImageError}
         className="aspect-[4/3] w-full object-cover"
       />
 

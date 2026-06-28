@@ -157,3 +157,44 @@ Desktop — détail annonce
 │                       │ [💬 Discuter][📞][🎥]  │
 └───────────────────────┴───────────────────────┘
 ```
+
+---
+
+## 6. Statut d'implémentation (mise à jour)
+
+### Liste Marketplace — ✅ Implémenté (`pages/Marketplace.tsx`)
+- **Recherche** : champ de recherche temps réel avec `useSearchParams` pour `cat` et `q`.
+- **Chips filtres** : scroll horizontal, `Tout` actif par défaut, filtrage par catégorie.
+- **Section « Annonces certifiées »** : grille séparée pour les annonces certifiées.
+- **Section « Toutes les annonces »** : grille 2 colonnes (mobile) / 3 (tablette) / 4 (desktop).
+- **SortMenu** : tri par récents, prix croissant/décroissant, populaires. Dropdown avec fermeture au clic extérieur.
+- **AnnonceGridCard** : badge certifié, bouton enregistrer, badge vidéo, prix, titre, localisation.
+- **Image fallback** : `handleImageError()` sur les images de grille.
+- **Logique de filtre factorisée** : fonction `matchFilters` partagée entre `filtered` et `filteredCertified` (DRY).
+
+### Filtres avancés — ✅ Implémenté (`components/marketplace/FilterPanel.tsx`)
+- **Catégories** : chips multi-sélection.
+- **Transaction** : boutons Tout/Louer/Vendre/Devis.
+- **Localisation** : champ texte libre.
+- **Budget** : champs Min/Max en FCFA.
+- **Options** : checkboxes « Certifiées uniquement » et « Disponible immédiatement ».
+- **Compteur de filtres actifs** + bouton « Réinitialiser ».
+- **Drawer mobile** : panneau coulissant depuis la droite avec overlay.
+- **Desktop** : panneau permanent à gauche (sidebar).
+
+### Détail annonce — ✅ Implémenté (`pages/AnnonceDetail.tsx`)
+- **Galerie photos** : `ImageCarousel` avec navigation.
+- **Vidéos** : lecteur vidéo intégré si disponibles.
+- **Documents** : liste avec icône et type (PDF, Word, file).
+- **Infos** : titre, prix, localisation, description, badges certifié/disponible.
+- **Page éditrice** : avatar, nom, abonnés, bouton « Voir page ».
+- **Actions** : like, save, share, discuter, appel, appel vidéo.
+- **Barre d'action sticky** en bas.
+
+### Recherche — ✅ Implémenté (`pages/SearchPage.tsx`)
+- **Debounce 300ms** sur la recherche pour éviter le filtrage à chaque frappe.
+- **Recherche par titre, localisation, description**.
+- **Filtre par catégorie** via chips.
+- **Recherches récentes** : persistance localStorage (max 8).
+- **Recherches tendance** : suggestions prédéfinies.
+- **Résultats** : liste avec `AnnonceGridCard`.

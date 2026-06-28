@@ -135,14 +135,14 @@ export default function Notifications() {
   }
 
   return (
-    <div className="mx-auto h-full w-full max-w-content overflow-y-auto pb-20 xl:pb-4">
-      <header className="sticky top-0 z-30 border-b border-line bg-white/95 px-4 py-3 backdrop-blur">
+    <div className="mx-auto h-full w-full max-w-content overflow-y-auto pb-16 xl:pb-4">
+      <header className="safe-top sticky top-0 z-30 border-b border-line bg-white/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button onClick={() => navigate(-1)} className="btn-ghost -ml-2 text-ink" aria-label="Retour">
               <ArrowLeft size={22} />
             </button>
-            <h1 className="text-2xl font-extrabold text-primary">Notifications</h1>
+            <h1 className="text-2xl font-extrabold text-ink">Notifications</h1>
           </div>
           {unreadCount > 0 && (
             <button onClick={markAllRead} className="text-sm font-semibold text-primary">

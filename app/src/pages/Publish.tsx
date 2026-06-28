@@ -103,30 +103,30 @@ export default function Publish() {
   }
 
   return (
-    <div className="h-full overflow-y-auto pb-24">
-      <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-line bg-white px-3 py-2">
+    <div className="h-full overflow-y-auto pb-16">
+      <header className="safe-top sticky top-0 z-30 flex items-center gap-3 border-b border-line bg-white px-3 py-2">
         <button onClick={() => navigate(-1)} className="btn-ghost text-ink" aria-label="Retour">
           <ArrowLeft size={22} />
         </button>
         <h1 className="text-lg font-bold">Publier une annonce</h1>
       </header>
 
-      <form onSubmit={onSubmit} noValidate className="mx-auto max-w-xl space-y-4 p-4">
+      <form onSubmit={onSubmit} noValidate className="mx-auto max-w-lg space-y-3 p-3">
         {/* Titre */}
         <div>
-          <label className="mb-1.5 block font-semibold">Titre</label>
+          <label className="mb-1 block font-semibold">Titre</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Ex. Maison meublée 4 pièces à louer"
-            className="w-full rounded-xl bg-soft px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-xl bg-soft px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/30"
           />
           {errors.title && <p className="mt-1 text-sm text-live">{errors.title}</p>}
         </div>
 
         {/* Catégorie */}
         <div>
-          <label className="mb-1.5 block font-semibold">Catégorie</label>
+          <label className="mb-1 block font-semibold">Catégorie</label>
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.map(({ key, label, icon: Icon }) => (
               <button
@@ -145,7 +145,7 @@ export default function Publish() {
 
         {/* Transaction */}
         <div>
-          <label className="mb-1.5 block font-semibold">Type d'offre</label>
+          <label className="mb-1 block font-semibold">Type d'offre</label>
           <div className="inline-flex flex-wrap rounded-xl bg-soft p-1">
             {(['louer', 'vendre', 'devis'] as Transaction[]).map((t) => (
               <button
@@ -166,23 +166,23 @@ export default function Publish() {
         {transaction !== 'devis' && (
         <div className="flex gap-3">
           <div className="flex-1">
-            <label className="mb-1.5 block font-semibold">Prix (FCFA)</label>
+            <label className="mb-1 block font-semibold">Prix (FCFA)</label>
             <input
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               inputMode="numeric"
               placeholder="350000"
-              className="w-full rounded-xl bg-soft px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-xl bg-soft px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/30"
             />
             {errors.price && <p className="mt-1 text-sm text-live">{errors.price}</p>}
           </div>
           {transaction === 'louer' && (
             <div className="w-32">
-              <label className="mb-1.5 block font-semibold">Par</label>
+              <label className="mb-1 block font-semibold">Par</label>
               <select
                 value={priceSuffix}
                 onChange={(e) => setPriceSuffix(e.target.value)}
-                className="w-full rounded-xl bg-soft px-3 py-3 outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full rounded-xl bg-soft px-3 py-2.5 outline-none focus:ring-2 focus:ring-primary/30"
               >
                 <option value="mois">mois</option>
                 <option value="jour">jour</option>
@@ -195,25 +195,25 @@ export default function Publish() {
 
         {/* Localisation */}
         <div>
-          <label className="mb-1.5 block font-semibold">Localisation</label>
+          <label className="mb-1 block font-semibold">Localisation</label>
           <input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Ex. Moungali, Brazzaville"
-            className="w-full rounded-xl bg-soft px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full rounded-xl bg-soft px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/30"
           />
           {errors.location && <p className="mt-1 text-sm text-live">{errors.location}</p>}
         </div>
 
         {/* Description */}
         <div>
-          <label className="mb-1.5 block font-semibold">Description</label>
+          <label className="mb-1 block font-semibold">Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             placeholder="Décrivez le bien : état, équipements, conditions…"
-            className="w-full resize-none rounded-xl bg-soft px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full resize-none rounded-xl bg-soft px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/30"
           />
           {errors.description && <p className="mt-1 text-sm text-live">{errors.description}</p>}
         </div>

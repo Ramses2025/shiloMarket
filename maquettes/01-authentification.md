@@ -159,3 +159,30 @@ Desktop (split)
 - Messages d'erreur sous le champ, en rouge `#E03131`.
 - Focus visible (contour vert) sur tous les champs et boutons.
 - Cibles tactiles ≥ 44 px.
+
+---
+
+## 6. Statut d'implémentation (mise à jour)
+
+### Connexion — ✅ Implémenté (`pages/auth/Login.tsx`)
+- Formulaire téléphone + mot de passe avec validation (min 6 chars téléphone, min 4 chars password).
+- Bouton afficher/masquer mot de passe (Eye/EyeOff).
+- Lien « Mot de passe oublié ? » (placeholder).
+- État de chargement simulé (600ms).
+- Layout desktop split : branding vert à gauche, formulaire à droite.
+- Persistance utilisateur via `AuthContext` + localStorage.
+
+### Inscription — ✅ Implémenté (`pages/auth/Register.tsx`)
+- Champs : nom complet, téléphone, mot de passe, confirmation.
+- Validation : nom ≥ 3 chars, téléphone ≥ 6 chars, password ≥ 4, confirmation identique.
+- Sélection type de compte via chips (5 types, `Client` par défaut).
+- État de chargement simulé (600ms).
+- Redirection vers `/` après inscription.
+
+### Vérification OTP — ⚠️ Non implémenté
+- Étape OTP prévue dans la maquette mais non codée (phase démo sans backend Supabase).
+
+### Édition de profil — ✅ Implémenté (`pages/EditProfile.tsx`)
+- Modification nom, téléphone, bio, localisation.
+- **Sauvegarde réelle** via `AuthContext.updateUser()` + persistance localStorage.
+- Toast de confirmation + redirection vers profil.

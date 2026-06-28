@@ -80,7 +80,7 @@ export interface Short {
   annonceId?: string
 }
 
-export type MessagePreviewKind = 'text' | 'voice' | 'image'
+export type MessagePreviewKind = 'text' | 'voice' | 'image' | 'location' | 'document'
 
 export interface Conversation {
   id: string
@@ -93,7 +93,7 @@ export interface Conversation {
   annonceTitle?: string
 }
 
-export type ChatMessageType = 'text' | 'voice' | 'image'
+export type ChatMessageType = 'text' | 'voice' | 'image' | 'location' | 'document'
 
 export interface ChatMessage {
   id: string

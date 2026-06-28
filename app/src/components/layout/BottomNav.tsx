@@ -19,7 +19,7 @@ export function BottomNav() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium transition ${
+                `flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium transition ${
                   isActive ? 'text-primary' : 'text-muted'
                 }`
               }

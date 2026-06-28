@@ -169,3 +169,37 @@ Desktop — page
 │            │ ▢ ▢ ▢ ▢                               │
 └────────────┴──────────────────────────────────────┘
 ```
+
+---
+
+## 7. Statut d'implémentation (mise à jour)
+
+### Profil connecté — ✅ Implémenté (`pages/Profile.tsx`)
+- **En-tête** : avatar, nom, type de compte, téléphone, bouton « Modifier ».
+- **Statistiques** : annonces, pages, enregistrés (compteurs dynamiques depuis `DataContext`).
+- **Menu** : Mes annonces, Enregistrés, Notifications, Paiements, Paramètres, Aide, Déconnexion.
+- **Déconnexion** : via `AuthContext.logout()`, redirection vers `/connexion`.
+
+### Modifier le profil — ✅ Implémenté (`pages/EditProfile.tsx`)
+- **Champs** : nom complet, téléphone, bio, localisation.
+- **Sauvegarde réelle** : via `AuthContext.updateUser()` — les modifications sont persistées dans `localStorage` et reflétées immédiatement dans toute l'app.
+- **Toast** : confirmation « Profil mis à jour ».
+- **Redirection** : vers `/profil` après sauvegarde.
+
+### Page (Agence / Entreprise / Propriétaire) — ✅ Implémenté (`pages/PageDetail.tsx`)
+- **En-tête** : bannière cover, avatar chevauchant, nom + badge certifié, type, abonnés, nombre d'annonces.
+- **Boutons** : S'abonner / Se désabonner (via `DataContext`), Contacter (crée conversation via `MessageContext`), Partager.
+- **Onglets** : Annonces (grille `AnnonceGridCard`), Shorts (grille réelle filtrée par page), À propos (description, localisation, certification).
+- **Shorts tab** : **corrigé** — affiche maintenant les Shorts réels de la page (filtrés par `page.id`) au lieu d'un message vide.
+
+### Mes annonces — ✅ Implémenté (`pages/MyAnnonces.tsx`)
+- **Filtrage** : par `user.id` ou `user.fullName` (corrigé pour être plus robuste).
+- **Statuts** : Active, Louée, Vendue, En attente avec couleurs.
+- **Actions** : éditer (placeholder), supprimer (avec toast).
+
+### Enregistrés — ✅ Implémenté (`pages/SavedItems.tsx`)
+- Affiche les annonces sauvegardées via `DataContext.isSaved()`.
+
+### Menu latéral — ✅ Implémenté (`components/layout/SideMenu.tsx`)
+- Profil utilisateur, liens de navigation, déconnexion.
+- Slide-in depuis la gauche avec overlay.

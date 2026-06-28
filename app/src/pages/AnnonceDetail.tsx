@@ -25,8 +25,8 @@ export default function AnnonceDetail() {
   }
 
   return (
-    <div className="h-full overflow-y-auto pb-24 xl:pb-8">
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white px-4 py-3">
+    <div className="h-full overflow-y-auto pb-16 xl:pb-8">
+      <header className="safe-top sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white px-4 py-3">
         <button onClick={() => navigate(-1)} className="btn-ghost -ml-2 text-ink" aria-label="Retour">
           <ArrowLeft size={22} />
         </button>
@@ -57,7 +57,9 @@ export default function AnnonceDetail() {
       <div className="mx-auto max-w-4xl px-4 py-4 lg:grid lg:grid-cols-[1fr_300px] lg:gap-6">
         {/* Colonne principale */}
         <div className="min-w-0">
-          <ImageCarousel images={annonce.images} alt={annonce.title} />
+          <div className="overflow-hidden rounded-xl">
+            <ImageCarousel images={annonce.images} alt={annonce.title} />
+          </div>
           {annonce.videos.map((v, i) => (
             <video
               key={`video-${i}`}
@@ -104,17 +106,17 @@ export default function AnnonceDetail() {
           <hr className="my-4 border-line" />
           <h2 className="mb-2 font-bold">Publié par</h2>
           <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/profil')} aria-label={`Voir la page ${annonce.page.name}`}>
+            <button onClick={() => navigate(`/page/${annonce.page.id}`)} aria-label={`Voir la page ${annonce.page.name}`}>
               <img src={annonce.page.avatarUrl} alt={annonce.page.name} className="h-12 w-12 rounded-full object-cover" />
             </button>
             <div className="flex-1">
-              <button onClick={() => navigate('/profil')} className="flex items-center gap-1 font-semibold">
+              <button onClick={() => navigate(`/page/${annonce.page.id}`)} className="flex items-center gap-1 font-semibold">
                 {annonce.page.name}
                 {annonce.page.verified && <VerifiedBadge />}
               </button>
               <div className="text-xs text-muted">{formatCount(annonce.page.followers)} abonnés</div>
             </div>
-            <button onClick={() => navigate('/profil')} className="btn-outline h-9 text-sm">Voir la page</button>
+            <button onClick={() => navigate(`/page/${annonce.page.id}`)} className="btn-outline h-9 text-sm">Voir la page</button>
           </div>
 
           <div className="mt-4 flex items-center gap-4 border-t border-line pt-3 text-sm text-muted">
@@ -136,7 +138,7 @@ export default function AnnonceDetail() {
       </div>
 
       {/* Barre d'action collée (mobile) */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-2 border-t border-line bg-white p-3 safe-bottom xl:hidden">
+      <div className="fixed inset-x-0 bottom-16 z-30 flex items-center gap-2 border-t border-line bg-white p-3 safe-bottom xl:hidden">
         <button onClick={() => navigate(`/messages/${annonce.id}`)} className="btn-primary h-12 flex-1">
           <MessageCircle size={18} /> Discuter
         </button>

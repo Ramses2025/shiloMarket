@@ -68,7 +68,7 @@ export function FilterPanel({ open, onClose, filters, onChange, resultCount }: P
           open ? 'translate-x-0' : 'translate-x-full xl:translate-x-0'
         }`}
       >
-        <header className="flex items-center justify-between border-b border-line px-4 py-3 xl:hidden">
+        <header className="safe-top flex items-center justify-between border-b border-line px-4 py-3 xl:hidden">
           <div className="flex items-center gap-2">
             <button onClick={onClose} aria-label="Fermer" className="btn-ghost -ml-2 text-ink">
               <ArrowLeft size={22} />
@@ -183,7 +183,7 @@ export function FilterPanel({ open, onClose, filters, onChange, resultCount }: P
           </fieldset>
         </div>
 
-        <div className="border-t border-line p-4 xl:hidden">
+        <div className="safe-bottom border-t border-line p-4 xl:hidden">
           <button onClick={onClose} className="btn-primary w-full">
             <Check size={18} /> Afficher {resultCount} résultat{resultCount > 1 ? 's' : ''}
           </button>

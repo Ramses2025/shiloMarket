@@ -145,3 +145,36 @@ Desktop
 │            │ (👤) Agence   │ ➕ [ saisie… ] 🎤      │
 └────────────┴───────────────┴───────────────────────┘
 ```
+
+---
+
+## 6. Statut d'implémentation (mise à jour)
+
+### Liste des conversations — ✅ Implémenté (`pages/Messages.tsx`)
+- **Recherche** : filtrage par nom de page ou aperçu du dernier message.
+- **Conversations** : affichées via `MessageContext` (état centralisé, plus de mutation directe des données mock).
+- **Suggestions de pages** : pages sans conversation existante, bouton pour démarrer une conversation.
+- **Nouveau message** : FAB `✏️` ouvre un modal avec les pages suggérées.
+- **Création de conversation** : via `MessageContext.createConversation()`, toast de confirmation, navigation vers la conversation.
+- **États** : non connecté (écran de connexion), liste vide (message + bouton nouveau).
+
+### Conversation (chat) — ✅ Implémenté (`pages/Conversation.tsx`)
+- **ChatHeader** : avatar, nom, badge, statut en ligne, boutons appel audio/vidéo (démo).
+- **Contexte annonce** : bandeau épinglé si la conversation vient d'une annonce.
+- **Bulles de messages** : `ChatMessageBubble` avec suppression (swipe/long press), accusés de lecture.
+- **Types de messages** : texte, vocal (lecteur), image, localisation, document.
+- **ChatInput** : champ texte, bouton micro (vocal), bouton pièce jointe (photo/lieu/document), emoji picker.
+- **Réponse simulée** : après envoi, indicateur de saisie puis réponse automatique après 2s.
+- **Persistance** : messages envoyés/reçus sauvegardés via `MessageContext` (état React, survit aux changements de page).
+- **Marquer comme lu** : `markAsRead()` au chargement de la conversation.
+- **Scroll auto** : vers le bas à chaque nouveau message.
+- **Création automatique** : si on arrive avec un ID d'annonce, une conversation est créée avec la page de l'annonce.
+
+### MessageContext — ✅ Implémenté (`context/MessageContext.tsx`)
+- **État centralisé** : `conversations` et `messagesByConvo` en `useState`.
+- **API** : `getConversation`, `getMessages`, `sendMessage`, `deleteMessage`, `createConversation`, `markAsRead`.
+- **Déduplication** : `createConversation` vérifie si une conversation existe déjà pour la page avant d'en créer une nouvelle.
+- **Mise à jour du dernier aperçu** : `sendMessage` met à jour `lastPreview`, `lastKind`, `time` et `unread` de la conversation.
+
+### Appel audio/vidéo — ⚠️ Non implémenté
+- Boutons présents mais affichent seulement un toast « Appel en cours… (démo) ». WebRTC non codé.

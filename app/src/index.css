@@ -5,6 +5,8 @@
 @layer base {
   :root {
     color-scheme: light;
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
   }
 
   html,
@@ -13,12 +15,42 @@
     height: 100%;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-soft text-ink font-sans antialiased;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   * {
     -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
   }
 }
 
@@ -47,7 +79,7 @@
 
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white
-           px-4 py-2 text-sm font-medium text-ink whitespace-nowrap transition;
+           px-3 py-1.5 text-sm font-medium text-ink whitespace-nowrap transition;
   }
   .chip-active {
     @apply bg-primary border-primary text-white;
@@ -72,5 +104,12 @@
   }
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-px {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 }

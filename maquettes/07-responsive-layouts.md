@@ -125,3 +125,35 @@
 └──────┘       └────────────┘        sidebar+contenu+panneau
 nav bas        nav bas centré        nav latérale
 ```
+
+---
+
+## 8. Statut d'implémentation (mise à jour)
+
+### Breakpoints — ✅ Implémenté
+- **Mobile** (`< 768px`) : barre inférieure `BottomNav`, FAB visible, 1 colonne.
+- **Tablette** (`768–1023px`) : barre inférieure, contenu centré max `720px`, 1–2 colonnes.
+- **Desktop** (`≥ 1024px`) : `Sidebar` verticale gauche `240px`, contenu central `680px`, panneau droit `300px`.
+
+### Navigation adaptative — ✅ Implémenté
+- **`AppLayout.tsx`** : orchestre l'affichage de `BottomNav` (mobile/tablette) vs `Sidebar` (desktop) via breakpoint Tailwind `xl`.
+- **Safe areas** : classes `safe-top`, `safe-bottom` respectant `env(safe-area-inset-*)`.
+
+### PWA — ✅ Implémenté
+- **Manifest** : `public/favicon.svg`, icônes 192/512, mode `standalone`, thème `#1FA84D`.
+- **Service worker** : `vite-plugin-pwa` avec cache du shell et des assets.
+- **InstallPrompt** : capture `beforeinstallprompt`, bannière d'installation.
+- **SplashScreen** : écran de chargement animé avec barre de progression.
+
+### Performance — ✅ Implémenté
+- **Lazy loading** : `React.lazy()` + `Suspense` sur toutes les routes sauf Feed et auth (entry points).
+- **PageLoader** : spinner de chargement pour les routes lazy.
+- **Images** : `loading="lazy"` sur tous les composants image.
+- **Image fallback** : `handleImageError()` avec placeholder SVG data-URI.
+- **Debounce** : 300ms sur la recherche (`SearchPage`).
+
+### Mode sombre — ⚠️ Non implémenté
+- Prévu dans la maquette mais non codé (variante optionnelle future).
+
+### Push notifications — ⚠️ Non implémenté
+- Prévu dans la maquette mais non codé (phase démo sans backend).

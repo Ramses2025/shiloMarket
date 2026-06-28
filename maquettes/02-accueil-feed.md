@@ -139,3 +139,29 @@ Desktop
 │ [Publier]  │  │  Carte post  │  │ #immobilier   │
 └────────────┴────────────────────┴──────────────┘
 ```
+
+---
+
+## 7. Statut d'implémentation (mise à jour)
+
+### Feed — ✅ Implémenté (`pages/Feed.tsx`)
+- **TopBar** : logo, recherche, notifications (pastille rouge si non lues), menu hamburger.
+- **Composer** : avatar utilisateur + bouton « Publiez une annonce… » + raccourcis Photos/Vidéo/Lieu → `/publier`.
+- **CategoryStrip** : scroll horizontal des catégories avec icônes, tap → `/marketplace?cat=`.
+- **PageSuggestions** : cartes horizontales avec cover, avatar, nom, abonnés, boutons Suivre/Voir.
+- **AnnonceCard** : carte complète avec en-tête page, badge certifié, catégorie, titre, description, carrousel photos, prix, badges, réactions, barre d'actions (J'aime, Commenter, Enregistrer, Partager, Discuter/Appel/Appel vidéo).
+- **RightRail** (desktop) : pages suggérées + tendances + encart promotionnel certification.
+- **FAB** : bouton flottant `✏️` → `/publier`.
+- **Skeletons** : `FeedCardSkeleton` pendant le chargement simulé.
+- **Empty state** : message « Aucune annonce à afficher » si la liste est vide.
+
+### Carte d'annonce — ✅ Implémenté (`components/feed/AnnonceCard.tsx`)
+- **ImageCarousel** : navigation par boutons/clic zones gauche/droite, barres de progression, compteur `1/N`.
+- **Badge vidéo** : position `absolute` corrigée avec conteneur `relative`.
+- **Image fallback** : `handleImageError()` avec placeholder SVG si image cassée.
+- **Réactions** : like toggle avec compteur, save avec toast, share avec copie de lien.
+- **Contacter** : bouton Discuter → création de conversation via `MessageContext`.
+
+### Composer — ✅ Implémenté (`components/feed/Composer.tsx`)
+- Avatar utilisateur connecté (ou `demoUser` si non connecté).
+- Raccourcis Photos/Vidéo/Lieu → navigation vers `/publier`.

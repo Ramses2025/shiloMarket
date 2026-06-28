@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Phone, Video } from 'lucide-react'
+import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Video } from 'lucide-react'
 import type { Annonce } from '../../types'
 import { formatPrice } from '../../lib/format'
 import { VerifiedBadge, CertifiedAnnonceTag, AvailableTag } from '../ui/Badges'
@@ -23,11 +23,11 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
   }
 
   return (
-    <article className="border-b border-line">
+    <article className="border-b border-line transition active:scale-[0.99]">
       {/* En-tête */}
       <div className="flex items-start gap-3 px-4 pt-4 pb-2">
         <button
-          onClick={() => navigate('/profil')}
+          onClick={() => navigate(`/page/${annonce.page.id}`)}
           aria-label={`Voir la page ${annonce.page.name}`}
         >
           <img
@@ -39,7 +39,7 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
         </button>
         <div className="min-w-0 flex-1">
           <button
-            onClick={() => navigate('/profil')}
+            onClick={() => navigate(`/page/${annonce.page.id}`)}
             className="flex items-center gap-1 font-semibold"
           >
             {annonce.page.name}
@@ -66,7 +66,7 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
         <div className="relative mt-3">
           <ImageCarousel images={annonce.images} alt={annonce.title} />
           {annonce.videos.length > 0 && (
-            <span className="absolute bottom-2 left-4 flex items-center gap-1 rounded bg-black/70 px-2 py-0.5 text-xs font-semibold text-white">
+            <span className="absolute bottom-2 left-5 flex items-center gap-1 rounded bg-black/70 px-2 py-0.5 text-xs font-semibold text-white">
               <Video size={14} /> Vidéo
             </span>
           )}
@@ -102,13 +102,13 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
         <button
           onClick={() => toggleLike(annonce.id)}
           aria-pressed={liked}
-          className={`flex items-center justify-center gap-1 py-2.5 hover:bg-soft ${liked ? 'text-primary' : ''}`}
+          className={`flex items-center justify-center gap-1 py-2.5 transition active:scale-95 hover:bg-soft ${liked ? 'text-primary' : ''}`}
         >
           <ThumbsUp size={18} className={liked ? 'fill-primary' : ''} /> J'aime
         </button>
         <button
           onClick={() => navigate(`/annonce/${annonce.id}`)}
-          className="flex items-center justify-center gap-1 py-2.5 hover:bg-soft"
+          className="flex items-center justify-center gap-1 py-2.5 transition active:scale-95 hover:bg-soft"
         >
           <MessageSquare size={18} /> Commenter
         </button>
@@ -118,39 +118,25 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
             show(saved ? 'Retiré des enregistrements' : 'Annonce enregistrée')
           }}
           aria-pressed={saved}
-          className={`flex items-center justify-center gap-1 py-2.5 hover:bg-soft ${saved ? 'text-primary' : ''}`}
+          className={`flex items-center justify-center gap-1 py-2.5 transition active:scale-95 hover:bg-soft ${saved ? 'text-primary' : ''}`}
         >
           <Bookmark size={18} className={saved ? 'fill-primary' : ''} /> Enregistrer
         </button>
         <button
           onClick={shareAnnonce}
-          className="flex items-center justify-center gap-1 py-2.5 hover:bg-soft"
+          className="flex items-center justify-center gap-1 py-2.5 transition active:scale-95 hover:bg-soft"
         >
           <Share2 size={18} /> Partager
         </button>
       </div>
 
       {/* Contacter */}
-      <div className="flex items-center gap-2 border-t border-line px-4 py-3">
+      <div className="px-4 py-3">
         <button
           onClick={() => navigate(`/messages/${annonce.id}`)}
-          className="btn-primary h-11 flex-1"
+          className="btn-primary h-10 w-full"
         >
           <MessageCircle size={18} /> Discuter
-        </button>
-        <button
-          onClick={() => show('Appel audio en cours… (démo)')}
-          aria-label="Appel audio"
-          className="grid h-11 w-12 place-items-center rounded-xl bg-primary-light text-primary"
-        >
-          <Phone size={18} />
-        </button>
-        <button
-          onClick={() => show('Appel vidéo en cours… (démo)')}
-          aria-label="Appel vidéo"
-          className="grid h-11 w-12 place-items-center rounded-xl bg-primary-light text-primary"
-        >
-          <Video size={18} />
         </button>
       </div>
     </article>

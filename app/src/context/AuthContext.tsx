@@ -11,9 +11,9 @@ interface RegisterInput {
 interface AuthContextValue {
   user: User | null
   isAuthenticated: boolean
-  // Authentification SIMULÉE (démo). Aucune requête réseau.
   login: (phone: string, _password: string) => Promise<void>
   register: (input: RegisterInput) => Promise<void>
+  updateUser: (patch: Partial<User>) => void
   logout: () => void
 }
 
@@ -55,13 +55,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
   }
 
+  function updateUser(patch: Partial<User>) {
+    setUser((prev) => {
+      if (!prev) return prev
+      const next = { ...prev, ...patch }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+      return next
+    })
+  }
+
   function logout() {
     persist(null)
   }
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: Boolean(user), login, register, logout }}
+      value={{ user, isAuthenticated: Boolean(user), login, register, updateUser, logout }}
     >
       {children}
     </AuthContext.Provider>

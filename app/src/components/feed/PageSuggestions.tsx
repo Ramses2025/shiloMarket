@@ -11,15 +11,15 @@ export function PageSuggestions() {
   const { show } = useToast()
 
   return (
-    <section className="border-b border-line px-4 pb-3 pt-4">
-      <h2 className="mb-2 text-lg font-bold">Pages suggérées</h2>
+    <section className="border-b border-line px-4 py-3">
+      <h2 className="mb-2 text-base font-bold">Pages suggérées</h2>
       <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
         {pages.map((p) => {
           const following = isFollowing(p.id)
           return (
-            <article key={p.id} className="w-56 flex-shrink-0 overflow-hidden rounded-xl border border-line bg-white">
+            <article key={p.id} className="w-48 flex-shrink-0 overflow-hidden rounded-xl border border-line">
               <button
-                onClick={() => navigate('/profil')}
+                onClick={() => navigate(`/page/${p.id}`)}
                 className="block h-24 w-full bg-soft"
                 aria-label={`Voir la page ${p.name}`}
               >
@@ -32,7 +32,7 @@ export function PageSuggestions() {
               </button>
               <div className="-mt-6 flex flex-col items-center px-3 pb-3 text-center">
                 <button
-                  onClick={() => navigate('/profil')}
+                  onClick={() => navigate(`/page/${p.id}`)}
                   aria-label={`Voir la page ${p.name}`}
                 >
                   <img
@@ -43,7 +43,7 @@ export function PageSuggestions() {
                   />
                 </button>
                 <button
-                  onClick={() => navigate('/profil')}
+                  onClick={() => navigate(`/page/${p.id}`)}
                   className="mt-1 flex items-center gap-1 font-semibold"
                 >
                   {p.name}
@@ -66,7 +66,7 @@ export function PageSuggestions() {
                     {following ? 'Suivi' : 'Suivre'}
                   </button>
                   <button
-                    onClick={() => navigate('/profil')}
+                    onClick={() => navigate(`/page/${p.id}`)}
                     className="flex-1 rounded-xl border border-line py-2 text-sm font-semibold text-ink hover:bg-soft"
                   >
                     Voir

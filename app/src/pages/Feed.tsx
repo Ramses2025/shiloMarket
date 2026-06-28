@@ -32,8 +32,8 @@ export default function Feed() {
       <div className="flex h-full w-full flex-col overflow-y-auto">
         <TopBar />
         {/* En-tête desktop (la TopBar est réservée au mobile) */}
-        <header className="sticky top-0 z-20 hidden items-center gap-3 border-b border-line bg-white/95 px-6 py-3 backdrop-blur xl:flex">
-          <h1 className="shrink-0 text-xl font-extrabold text-primary">Accueil</h1>
+        <header className="safe-top sticky top-0 z-20 hidden items-center gap-3 border-b border-line bg-white/95 px-6 py-3 backdrop-blur xl:flex">
+          <h1 className="shrink-0 text-xl font-extrabold text-ink">Accueil</h1>
           <div className="ml-auto flex w-full max-w-sm items-center gap-3 rounded-xl bg-soft px-4 py-2.5 text-muted">
             <Search size={18} className="shrink-0 text-muted" />
             <button onClick={() => navigate('/recherche')} className="text-left text-muted">
@@ -57,7 +57,7 @@ export default function Feed() {
           </button>
         </header>
 
-        <main className="w-full" aria-label="Fil d'annonces">
+        <main className="mx-auto w-full max-w-feed" aria-label="Fil d'annonces">
           <Composer />
           <CategoryStrip />
           {/* Pages suggérées en ligne sur mobile/tablette uniquement */}

@@ -14,24 +14,24 @@ export function Composer() {
           src={user?.avatarUrl ?? demoUser.avatarUrl}
           alt={user?.fullName ?? demoUser.fullName}
           loading="lazy"
-          className="h-10 w-10 rounded-full object-cover"
+          className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
         />
-        <button onClick={go} className="flex-1 rounded-full bg-soft px-4 py-2.5 text-left text-muted">
+        <button
+          onClick={go}
+          className="min-w-0 flex-1 truncate whitespace-nowrap rounded-full border border-line px-4 py-2.5 text-left text-sm text-muted transition active:scale-[0.98]"
+        >
           Publiez une annonce ou un service…
         </button>
       </div>
-      <div className="mt-3 flex items-center justify-between pt-3 text-sm font-medium">
-        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
-          <Image size={18} className="text-primary" /> Photos
+      <div className="mt-2.5 flex items-center justify-between text-sm font-medium">
+        <button onClick={go} className="flex items-center gap-1.5 px-1 py-1.5 text-ink transition active:scale-95">
+          <Image size={18} className="text-primary" /> <span className="whitespace-nowrap">Photos</span>
         </button>
-        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
-          <Video size={18} className="text-live" /> Vidéo
+        <button onClick={go} className="flex items-center gap-1.5 px-1 py-1.5 text-ink transition active:scale-95">
+          <Video size={18} className="text-live" /> <span className="whitespace-nowrap">Vidéo</span>
         </button>
-        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
-          <MapPin size={18} className="text-loc" /> Lieu
-        </button>
-        <button onClick={go} className="btn-primary h-9 px-4 text-sm">
-          Publier
+        <button onClick={go} className="flex items-center gap-1.5 px-1 py-1.5 text-ink transition active:scale-95">
+          <MapPin size={18} className="text-loc" /> <span className="whitespace-nowrap">Lieu</span>
         </button>
       </div>
     </div>

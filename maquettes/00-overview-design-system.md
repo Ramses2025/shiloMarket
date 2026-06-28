@@ -144,3 +144,48 @@ Principes :
 | **Entreprise** | 🏬 | Vitrine commerciale, page vérifiée |
 
 > Les pages **Agence / Entreprise / Propriétaire** peuvent obtenir un badge **Certifié** (violet) ou **Vérifié** (vert).
+
+---
+
+## 10. Statut d'implémentation (mise à jour)
+
+### Composants transverses — ✅ Implémenté
+- **Boutons primaires/secondaires** : classes `btn-primary`, `btn-outline`, `btn-ghost` dans `index.css`.
+- **Champs de saisie** : classe `field` avec icône gauche, fond `gris-fond`.
+- **Chips/filtres** : classes `chip` / `chip-active` utilisées partout (catégories, filtres, types de compte).
+- **Cartes** : classe `card` avec rayon `16px`, ombre douce.
+- **Badges** : `CertifiedTag`, `VerifiedBadge`, `AvailableBadge` dans `components/ui/Badges.tsx`.
+- **FAB** : bouton flottant `✏️` présent sur Feed et Marketplace, classe `shadow-fab`.
+- **Skeletons** : `FeedCardSkeleton`, `GridCardSkeleton` dans `components/ui/Skeleton.tsx`.
+- **SplashScreen** : logo + barre de progression, `components/ui/SplashScreen.tsx`.
+- **DemoBanner** : bandeau mode démo, `components/ui/DemoBanner.tsx`.
+- **InstallPrompt** : bannière PWA d'installation, `components/ui/InstallPrompt.tsx`.
+- **ErrorBoundary** : capture globale des erreurs, `components/ErrorBoundary.tsx`.
+
+### Navigation — ✅ Implémenté
+- **Barre inférieure** (mobile/tablette) : `BottomNav.tsx` avec 5 onglets.
+- **Sidebar desktop** : `Sidebar.tsx` (≥ 1024px) avec logo + items + bouton Publier.
+- **SideMenu** (hamburger mobile) : `SideMenu.tsx` avec profil, menu, déconnexion.
+- **TopBar** : logo, recherche, notifications (pastille), menu hamburger.
+
+### Contextes globaux — ✅ Implémenté
+- **AuthContext** : login, register, updateUser, logout, persistance localStorage.
+- **DataContext** : annonces, likes, saves, follows, en mémoire.
+- **ToastContext** : notifications toast temporaires.
+- **MessageContext** : conversations, messages, création, suppression, marquer comme lu.
+
+### PWA — ✅ Implémenté
+- **Manifest** : `public/favicon.svg`, icônes 192/512, mode standalone.
+- **Service worker** : via `vite-plugin-pwa`.
+- **Installable** : `InstallPrompt` capture `beforeinstallprompt`.
+- **Splash screen** : écran de chargement animé.
+
+### Performance — ✅ Implémenté
+- **Lazy loading des routes** : `React.lazy()` + `Suspense` pour toutes les pages sauf Feed et auth.
+- **Images lazy** : `loading="lazy"` sur tous les composants image.
+- **Image fallback** : `handleImageError()` avec placeholder SVG.
+- **Debounce recherche** : 300ms sur `SearchPage`.
+
+### Types de comptes — ✅ Implémenté
+- 5 types (`Client`, `Propriétaire`, `Prestataire`, `Agence`, `Entreprise`) dans `constants.tsx`.
+- Sélection via chips à l'inscription.

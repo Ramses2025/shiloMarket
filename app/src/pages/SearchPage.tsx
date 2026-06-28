@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, X, TrendingUp, Clock, MapPin } from 'lucide-react'
 import { CATEGORIES } from '../constants'
@@ -12,6 +12,8 @@ export default function SearchPage() {
   const navigate = useNavigate()
   const { annonces } = useData()
   const [query, setQuery] = useState('')
+  const [debouncedQuery, setDebouncedQuery] = useState('')
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [activeCat, setActiveCat] = useState<Category | 'all'>('all')
   const [recentSearches, setRecentSearches] = useState<string[]>(() => {
     try {
@@ -21,6 +23,12 @@ export default function SearchPage() {
       return []
     }
   })
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => setDebouncedQuery(query), 300)
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
+  }, [query])
 
   useEffect(() => {
     try {
@@ -34,13 +42,13 @@ export default function SearchPage() {
     return annonces.filter((a) => {
       const okCat = activeCat === 'all' || a.category === activeCat
       const okQuery =
-        !query ||
-        a.title.toLowerCase().includes(query.toLowerCase()) ||
-        a.location.toLowerCase().includes(query.toLowerCase()) ||
-        a.description.toLowerCase().includes(query.toLowerCase())
+        !debouncedQuery ||
+        a.title.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+        a.location.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+        a.description.toLowerCase().includes(debouncedQuery.toLowerCase())
       return okCat && okQuery
     })
-  }, [annonces, query, activeCat])
+  }, [annonces, debouncedQuery, activeCat])
 
   function submitSearch(q: string) {
     setQuery(q)
@@ -65,8 +73,8 @@ export default function SearchPage() {
   const showTrending = !query && recentSearches.length === 0
 
   return (
-    <div className="mx-auto h-full w-full max-w-content overflow-y-auto pb-20 xl:pb-4">
-      <header className="sticky top-0 z-30 border-b border-line bg-white/95 px-4 py-3 backdrop-blur">
+    <div className="mx-auto h-full w-full max-w-content overflow-y-auto pb-16 xl:pb-4">
+      <header className="safe-top sticky top-0 z-30 border-b border-line bg-white/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="field h-12 flex-1">
             <Search size={20} className="text-muted" />

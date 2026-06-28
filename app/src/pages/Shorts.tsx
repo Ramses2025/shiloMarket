@@ -5,6 +5,7 @@ import { shorts } from '../data/shorts'
 import { formatCount } from '../lib/format'
 import { VerifiedBadge } from '../components/ui/Badges'
 import { useData } from '../context/DataContext'
+import { useMessages } from '../context/MessageContext'
 import { useToast } from '../context/ToastContext'
 
 function ShortItem({
@@ -19,6 +20,7 @@ function ShortItem({
   onFollow,
   onNavigate,
   onShow,
+  onContact,
 }: {
   short: (typeof shorts)[number]
   index: number
@@ -31,6 +33,7 @@ function ShortItem({
   onFollow: () => void
   onNavigate: (path: string) => void
   onShow: (msg: string) => void
+  onContact: () => void
 }) {
   const likeCount = short.likes + (liked ? 1 : 0)
 
@@ -49,16 +52,16 @@ function ShortItem({
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25" />
 
       {isActive && (
-        <span className="absolute top-4 left-1/2 -translate-x-1/2 font-bold text-white">Shorts</span>
+        <span className="safe-top absolute top-4 left-1/2 -translate-x-1/2 font-bold text-white">Shorts</span>
       )}
 
       {isActive && (
-        <span className="absolute top-4 left-4 rounded-full bg-black/40 px-2.5 py-1 text-xs font-medium text-white">
+        <span className="safe-top absolute top-4 left-4 rounded-full bg-black/40 px-2.5 py-1 text-xs font-medium text-white">
           {index + 1} / {total}
         </span>
       )}
 
-      <div className="absolute bottom-28 right-3 flex flex-col items-center gap-5 text-white">
+      <div className="absolute bottom-20 right-3 flex flex-col items-center gap-4 text-white safe-bottom">
         <button className="flex flex-col items-center" onClick={onLike} aria-label="J'aime" aria-pressed={liked}>
           <Heart
             size={30}
@@ -92,7 +95,7 @@ function ShortItem({
         </button>
         <button
           className="flex flex-col items-center"
-          onClick={() => onNavigate(short.annonceId ? `/messages/${short.annonceId}` : '/messages')}
+          onClick={onContact}
         >
           <span className="grid h-11 w-11 place-items-center rounded-full bg-white/20">
             <MessageSquare size={22} />
@@ -101,7 +104,7 @@ function ShortItem({
         </button>
       </div>
 
-      <div className="absolute bottom-24 left-4 right-20 text-white">
+      <div className="absolute bottom-20 left-4 right-20 text-white safe-bottom">
         <button
           onClick={() => onNavigate('/profil')}
           className="flex items-center gap-2"
@@ -134,6 +137,7 @@ function ShortItem({
 export default function Shorts() {
   const navigate = useNavigate()
   const { isFollowing, toggleFollow } = useData()
+  const { createConversation } = useMessages()
   const { show } = useToast()
   const [active, setActive] = useState(0)
   const [liked, setLiked] = useState<Set<string>>(new Set())
@@ -232,6 +236,14 @@ export default function Shorts() {
                   : () => {}}
                 onNavigate={navigate}
                 onShow={show}
+                onContact={
+                  i === active
+                    ? () => {
+                        const convoId = createConversation(s.page)
+                        navigate(`/messages/${convoId}`)
+                      }
+                    : () => {}
+                }
               />
             </div>
           ))}

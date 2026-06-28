@@ -30,7 +30,7 @@ export function RightRail() {
             return (
               <li key={p.id} className="flex items-center gap-3">
                 <button
-                  onClick={() => navigate('/profil')}
+                  onClick={() => navigate(`/page/${p.id}`)}
                   aria-label={`Voir la page ${p.name}`}
                 >
                   <img
@@ -42,7 +42,7 @@ export function RightRail() {
                 </button>
                 <div className="min-w-0 flex-1">
                   <button
-                    onClick={() => navigate('/profil')}
+                    onClick={() => navigate(`/page/${p.id}`)}
                     className="flex items-center gap-1 text-sm font-semibold"
                   >
                     <span className="truncate">{p.name}</span>
