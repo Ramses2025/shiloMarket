@@ -13,6 +13,7 @@ import Publish from './pages/Publish'
 import NotFound from './pages/NotFound'
 import DemoBanner from './components/ui/DemoBanner'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { InstallPrompt } from './components/ui/InstallPrompt'
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/shorts" element={<Shorts />} />
           </Routes>
         </div>
+        <InstallPrompt />
       </div>
     </ErrorBoundary>
   )
