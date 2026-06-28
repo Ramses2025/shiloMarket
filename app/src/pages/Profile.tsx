@@ -22,7 +22,7 @@ const MENU = [
   { icon: PlayCircle, label: 'Mes Shorts' },
   { icon: Bell, label: 'Notifications' },
   { icon: CreditCard, label: 'Paiements & abonnements' },
-  { icon: Settings, label: 'Paramètres' },
+  { icon: Settings, label: 'Paramètres', link: '/parametres' },
   { icon: HelpCircle, label: 'Aide & support' },
 ]
 
@@ -69,9 +69,12 @@ export default function Profile() {
       </div>
 
       <ul className="mt-4">
-        {MENU.map(({ icon: Icon, label }) => (
+        {MENU.map(({ icon: Icon, label, link }) => (
           <li key={label}>
-            <button className="flex w-full items-center gap-3 px-4 py-3.5 text-left hover:bg-soft">
+            <button
+              onClick={() => link && navigate(link)}
+              className="flex w-full items-center gap-3 px-4 py-3.5 text-left hover:bg-soft"
+            >
               <Icon size={20} className="text-ink" />
               <span className="flex-1 font-medium">{label}</span>
               <ChevronRight size={18} className="text-muted" />

@@ -10,6 +10,9 @@ import Messages from './pages/Messages'
 import Conversation from './pages/Conversation'
 import Profile from './pages/Profile'
 import Publish from './pages/Publish'
+import Notifications from './pages/Notifications'
+import SearchPage from './pages/SearchPage'
+import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
 import DemoBanner from './components/ui/DemoBanner'
 import { ErrorBoundary } from './components/ErrorBoundary'
@@ -32,6 +35,9 @@ export default function App() {
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/annonce/:id" element={<AnnonceDetail />} />
               <Route path="/publier" element={<Publish />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/recherche" element={<SearchPage />} />
+              <Route path="/parametres" element={<Settings />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/profil" element={<Profile />} />
               <Route path="*" element={<NotFound />} />

@@ -16,14 +16,17 @@ export function Composer() {
         </button>
       </div>
       <div className="mt-3 flex items-center justify-between border-t border-line pt-3 text-sm font-medium">
-        <button onClick={go} className="flex items-center gap-1.5 text-ink">
+        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
           <Image size={18} className="text-primary" /> Photos
         </button>
-        <button onClick={go} className="flex items-center gap-1.5 text-ink">
+        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
           <Video size={18} className="text-live" /> Vidéo
         </button>
-        <button onClick={go} className="flex items-center gap-1.5 text-ink">
-          <MapPin size={18} className="text-loc" /> Localisation
+        <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
+          <MapPin size={18} className="text-loc" /> Lieu
+        </button>
+        <button onClick={go} className="btn-primary h-9 px-4 text-sm">
+          Publier
         </button>
       </div>
     </div>

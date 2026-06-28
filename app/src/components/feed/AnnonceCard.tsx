@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Phone, Video } from 'lucide-react'
+import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Phone, Video, Heart } from 'lucide-react'
 import type { Annonce } from '../../types'
 import { formatPrice } from '../../lib/format'
 import { VerifiedBadge, CertifiedAnnonceTag, AvailableTag } from '../ui/Badges'
@@ -72,10 +72,13 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
       )}
 
       {/* Compteurs */}
-      <div className="flex items-center justify-between px-4 py-3 text-sm text-muted">
-        <span>👍❤️😍 {likeCount(annonce)}</span>
-        <span>
-          {annonce.comments} commentaires · {annonce.shares} partages
+      <div className="flex items-center justify-between px-4 py-2.5 text-sm text-muted">
+        <span className="flex items-center gap-1">
+          <Heart size={14} className="fill-live text-live" /> {likeCount(annonce)}
+        </span>
+        <span className="flex items-center gap-3">
+          <span className="flex items-center gap-1"><MessageSquare size={14} /> {annonce.comments}</span>
+          <span className="flex items-center gap-1"><Share2 size={14} /> {annonce.shares}</span>
         </span>
       </div>
 

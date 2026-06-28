@@ -19,7 +19,7 @@ export function PageSuggestions() {
                 {p.verified && <VerifiedBadge />}
               </div>
               <div className="text-xs text-muted">{formatCount(p.followers)} abonnés</div>
-              <button className="btn-outline mt-2 h-9 w-full text-sm">Voir la page</button>
+              <button className="btn-primary mt-2 h-9 w-full text-sm">Suivre</button>
             </div>
           </article>
         ))}
