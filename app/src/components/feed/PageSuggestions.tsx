@@ -11,13 +11,13 @@ export function PageSuggestions() {
   const { show } = useToast()
 
   return (
-    <section className="mt-4 px-4">
+    <section className="border-b border-line px-4 pb-3 pt-4">
       <h2 className="mb-2 text-lg font-bold">Pages suggérées</h2>
       <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
         {pages.map((p) => {
           const following = isFollowing(p.id)
           return (
-            <article key={p.id} className="card w-56 flex-shrink-0 overflow-hidden">
+            <article key={p.id} className="w-56 flex-shrink-0 overflow-hidden rounded-xl border border-line bg-white">
               <button
                 onClick={() => navigate('/profil')}
                 className="block h-24 w-full bg-soft"

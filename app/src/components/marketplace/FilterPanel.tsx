@@ -110,16 +110,16 @@ export function FilterPanel({ open, onClose, filters, onChange, resultCount }: P
 
           <fieldset className="mb-5">
             <legend className="mb-2 text-sm font-bold">Transaction</legend>
-            <div className="inline-flex flex-wrap rounded-xl bg-soft p-1">
+            <div className="inline-flex flex-wrap gap-1 rounded-xl bg-soft p-1">
               {(['all', 'louer', 'vendre', 'devis'] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => update({ transaction: t })}
-                  className={`rounded-lg px-4 py-2 text-sm font-semibold capitalize transition ${
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                     filters.transaction === t ? 'bg-primary text-white' : 'text-ink'
                   }`}
                 >
-                  {t === 'all' ? 'Tout' : t === 'louer' ? 'À louer' : t === 'vendre' ? 'À vendre' : 'Sur devis'}
+                  {t === 'all' ? 'Tout' : t === 'louer' ? 'Louer' : t === 'vendre' ? 'Vendre' : 'Devis'}
                 </button>
               ))}
             </div>

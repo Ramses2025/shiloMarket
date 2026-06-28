@@ -8,7 +8,7 @@ export function Composer() {
   const { user } = useAuth()
   const go = () => navigate('/publier')
   return (
-    <div className="card mx-4 mt-3 p-4">
+    <div className="border-b border-line px-4 py-3">
       <div className="flex items-center gap-3">
         <img
           src={user?.avatarUrl ?? demoUser.avatarUrl}
@@ -20,7 +20,7 @@ export function Composer() {
           Publiez une annonce ou un service…
         </button>
       </div>
-      <div className="mt-3 flex items-center justify-between border-t border-line pt-3 text-sm font-medium">
+      <div className="mt-3 flex items-center justify-between pt-3 text-sm font-medium">
         <button onClick={go} className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-ink hover:bg-soft">
           <Image size={18} className="text-primary" /> Photos
         </button>

@@ -4,7 +4,7 @@ export function Skeleton({ className = '' }: { className?: string }) {
 
 export function FeedCardSkeleton() {
   return (
-    <div className="card mx-4 mt-3 overflow-hidden p-4">
+    <div className="border-b border-line p-4">
       <div className="flex items-center gap-3">
         <Skeleton className="h-11 w-11 rounded-full" />
         <div className="flex-1 space-y-2">
@@ -14,7 +14,7 @@ export function FeedCardSkeleton() {
       </div>
       <Skeleton className="mt-3 h-4 w-3/4" />
       <Skeleton className="mt-2 h-3 w-full" />
-      <Skeleton className="mt-3 aspect-[4/3] w-full rounded-xl" />
+      <Skeleton className="mt-3 aspect-[4/3] w-full" />
     </div>
   )
 }

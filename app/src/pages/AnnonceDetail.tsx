@@ -25,11 +25,12 @@ export default function AnnonceDetail() {
   }
 
   return (
-    <div className="mx-auto h-full w-full max-w-content overflow-y-auto pb-24 xl:pb-8">
-      <header className="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-3 py-2 backdrop-blur">
-        <button onClick={() => navigate(-1)} className="btn-ghost text-ink">
+    <div className="h-full overflow-y-auto pb-24 xl:pb-8">
+      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white px-4 py-3">
+        <button onClick={() => navigate(-1)} className="btn-ghost -ml-2 text-ink" aria-label="Retour">
           <ArrowLeft size={22} />
         </button>
+        <span className="text-sm font-semibold text-muted">Détail de l'annonce</span>
         <div className="flex gap-1">
           <button
             onClick={() => { toggleSave(annonce.id); show(isSaved(annonce.id) ? 'Retiré des enregistrements' : 'Annonce enregistrée') }}
@@ -53,39 +54,38 @@ export default function AnnonceDetail() {
         </div>
       </header>
 
-      <div className="px-4">
-        <ImageCarousel images={annonce.images} alt={annonce.title} />
-        {annonce.videos.map((v, i) => (
-          <video
-            key={`video-${i}`}
-            src={v}
-            controls
-            className="mt-3 w-full rounded-xl bg-black"
-          />
-        ))}
-        {annonce.documents.length > 0 && (
-          <div className="mt-3 space-y-2">
-            <h3 className="text-sm font-bold">Documents</h3>
-            {annonce.documents.map((doc, i) => (
-              <a
-                key={`doc-${i}`}
-                href={doc.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-line bg-white p-3 transition hover:bg-soft"
-              >
-                <FileText size={20} className="shrink-0 text-primary" />
-                <span className="flex-1 truncate text-sm font-medium">{doc.name}</span>
-                <Download size={18} className="shrink-0 text-muted" />
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
+      <div className="mx-auto max-w-4xl px-4 py-4 lg:grid lg:grid-cols-[1fr_300px] lg:gap-6">
+        {/* Colonne principale */}
+        <div className="min-w-0">
+          <ImageCarousel images={annonce.images} alt={annonce.title} />
+          {annonce.videos.map((v, i) => (
+            <video
+              key={`video-${i}`}
+              src={v}
+              controls
+              className="mt-3 w-full rounded-xl bg-black"
+            />
+          ))}
+          {annonce.documents.length > 0 && (
+            <div className="mt-3 space-y-2">
+              <h3 className="text-sm font-bold">Documents</h3>
+              {annonce.documents.map((doc, i) => (
+                <a
+                  key={`doc-${i}`}
+                  href={doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-line bg-white p-3 transition hover:bg-soft"
+                >
+                  <FileText size={20} className="shrink-0 text-primary" />
+                  <span className="flex-1 truncate text-sm font-medium">{doc.name}</span>
+                  <Download size={18} className="shrink-0 text-muted" />
+                </a>
+              ))}
+            </div>
+          )}
 
-      <div className="px-4 pt-3 xl:grid xl:grid-cols-[1fr_320px] xl:gap-6">
-        <div>
-          {annonce.certified && <CertifiedTag />}
+          {annonce.certified && <div className="mt-3"><CertifiedTag /></div>}
           <h1 className="mt-2 text-2xl font-extrabold">{annonce.title}</h1>
           <div className="mt-1 flex flex-wrap items-center gap-2">
             <span className="text-xl font-extrabold text-primary">
@@ -123,8 +123,8 @@ export default function AnnonceDetail() {
           </div>
         </div>
 
-        {/* Actions desktop */}
-        <aside className="hidden xl:block">
+        {/* Sidebar droite desktop */}
+        <aside className="hidden lg:block">
           <div className="card sticky top-20 space-y-2 p-4">
             <button onClick={() => navigate(`/messages/${annonce.id}`)} className="btn-primary w-full">
               <MessageCircle size={18} /> Discuter

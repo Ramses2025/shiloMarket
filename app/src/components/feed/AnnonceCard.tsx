@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Phone, Video, Heart } from 'lucide-react'
+import { MapPin, ThumbsUp, MessageSquare, Bookmark, Share2, MessageCircle, Phone, Video } from 'lucide-react'
 import type { Annonce } from '../../types'
 import { formatPrice } from '../../lib/format'
 import { VerifiedBadge, CertifiedAnnonceTag, AvailableTag } from '../ui/Badges'
@@ -23,9 +23,9 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
   }
 
   return (
-    <article className="card mx-4 mt-3 overflow-hidden">
+    <article className="border-b border-line">
       {/* En-tête */}
-      <div className="flex items-start gap-3 p-4 pb-2">
+      <div className="flex items-start gap-3 px-4 pt-4 pb-2">
         <button
           onClick={() => navigate('/profil')}
           aria-label={`Voir la page ${annonce.page.name}`}
@@ -56,38 +56,40 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
         </div>
       </div>
 
-      {/* Contenu */}
-      <button onClick={() => navigate(`/annonce/${annonce.id}`)} className="block w-full px-4 text-left">
-        <h3 className="text-lg font-bold leading-snug">{annonce.title}</h3>
-        <p className="mt-1 line-clamp-3 text-[15px] text-ink/80">{annonce.description}</p>
-      </button>
+      {/* Contenu + image cliquables */}
+      <div onClick={() => navigate(`/annonce/${annonce.id}`)} className="cursor-pointer">
+        <div className="block w-full px-4 text-left">
+          <h3 className="text-lg font-bold leading-snug">{annonce.title}</h3>
+          <p className="mt-1 line-clamp-3 text-[15px] text-ink/80">{annonce.description}</p>
+        </div>
 
-      <div className="relative mt-3 px-4">
-        <ImageCarousel images={annonce.images} alt={annonce.title} />
-        {annonce.videos.length > 0 && (
-          <span className="absolute bottom-2 left-6 flex items-center gap-1 rounded bg-black/70 px-2 py-0.5 text-xs font-semibold text-white">
-            <Video size={14} /> Vidéo
+        <div className="relative mt-3">
+          <ImageCarousel images={annonce.images} alt={annonce.title} />
+          {annonce.videos.length > 0 && (
+            <span className="absolute bottom-2 left-4 flex items-center gap-1 rounded bg-black/70 px-2 py-0.5 text-xs font-semibold text-white">
+              <Video size={14} /> Vidéo
+            </span>
+          )}
+        </div>
+
+        {/* Prix */}
+        <div className="flex flex-wrap items-center gap-2 px-4 pt-3">
+          <span className="text-xl font-extrabold text-primary">
+            {formatPrice(annonce.price, annonce.priceSuffix)}
           </span>
+          {annonce.available && <AvailableTag />}
+        </div>
+        {annonce.certified && (
+          <div className="px-4 pt-2">
+            <CertifiedAnnonceTag />
+          </div>
         )}
       </div>
-
-      {/* Prix */}
-      <div className="flex flex-wrap items-center gap-2 px-4 pt-3">
-        <span className="text-xl font-extrabold text-primary">
-          {formatPrice(annonce.price, annonce.priceSuffix)}
-        </span>
-        {annonce.available && <AvailableTag />}
-      </div>
-      {annonce.certified && (
-        <div className="px-4 pt-2">
-          <CertifiedAnnonceTag />
-        </div>
-      )}
 
       {/* Compteurs */}
       <div className="flex items-center justify-between px-4 py-2.5 text-sm text-muted">
         <span className="flex items-center gap-1">
-          <Heart size={14} className="fill-live text-live" /> {likeCount(annonce)}
+          <ThumbsUp size={14} className="fill-primary text-primary" /> {likeCount(annonce)}
         </span>
         <span className="flex items-center gap-3">
           <span className="flex items-center gap-1"><MessageSquare size={14} /> {annonce.comments}</span>
@@ -96,19 +98,19 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
       </div>
 
       {/* Actions */}
-      <div className="grid grid-cols-4 border-t border-line text-sm font-medium text-ink">
+      <div className="grid grid-cols-4 border-t border-line text-xs font-semibold text-muted sm:text-sm">
         <button
           onClick={() => toggleLike(annonce.id)}
           aria-pressed={liked}
-          className={`flex items-center justify-center gap-1.5 py-2.5 hover:bg-soft ${liked ? 'text-primary' : ''}`}
+          className={`flex items-center justify-center gap-1 py-2.5 hover:bg-soft ${liked ? 'text-primary' : ''}`}
         >
           <ThumbsUp size={18} className={liked ? 'fill-primary' : ''} /> J'aime
         </button>
         <button
           onClick={() => navigate(`/annonce/${annonce.id}`)}
-          className="flex items-center justify-center gap-1.5 py-2.5 hover:bg-soft"
+          className="flex items-center justify-center gap-1 py-2.5 hover:bg-soft"
         >
-          <MessageSquare size={18} /> Comm.
+          <MessageSquare size={18} /> Commenter
         </button>
         <button
           onClick={() => {
@@ -116,20 +118,20 @@ export function AnnonceCard({ annonce }: { annonce: Annonce }) {
             show(saved ? 'Retiré des enregistrements' : 'Annonce enregistrée')
           }}
           aria-pressed={saved}
-          className={`flex items-center justify-center gap-1.5 py-2.5 hover:bg-soft ${saved ? 'text-primary' : ''}`}
+          className={`flex items-center justify-center gap-1 py-2.5 hover:bg-soft ${saved ? 'text-primary' : ''}`}
         >
-          <Bookmark size={18} className={saved ? 'fill-primary' : ''} /> Enreg.
+          <Bookmark size={18} className={saved ? 'fill-primary' : ''} /> Enregistrer
         </button>
         <button
           onClick={shareAnnonce}
-          className="flex items-center justify-center gap-1.5 py-2.5 hover:bg-soft"
+          className="flex items-center justify-center gap-1 py-2.5 hover:bg-soft"
         >
           <Share2 size={18} /> Partager
         </button>
       </div>
 
       {/* Contacter */}
-      <div className="flex items-center gap-2 border-t border-line p-3">
+      <div className="flex items-center gap-2 border-t border-line px-4 py-3">
         <button
           onClick={() => navigate(`/messages/${annonce.id}`)}
           className="btn-primary h-11 flex-1"

@@ -5,7 +5,7 @@ export function ImageCarousel({ images, alt }: { images: string[]; alt: string }
   const count = images.length
 
   return (
-    <div className="relative overflow-hidden rounded-xl bg-soft">
+    <div className="relative overflow-hidden bg-soft">
       {count > 1 && (
         <div className="absolute left-2 right-2 top-2 z-10 flex gap-1">
           {images.map((_, i) => (
@@ -31,12 +31,12 @@ export function ImageCarousel({ images, alt }: { images: string[]; alt: string }
           </span>
           <button
             aria-label="Précédent"
-            onClick={() => setIndex((i) => (i - 1 + count) % count)}
+            onClick={(e) => { e.stopPropagation(); setIndex((i) => (i - 1 + count) % count) }}
             className="absolute left-0 top-0 h-full w-1/3"
           />
           <button
             aria-label="Suivant"
-            onClick={() => setIndex((i) => (i + 1) % count)}
+            onClick={(e) => { e.stopPropagation(); setIndex((i) => (i + 1) % count) }}
             className="absolute right-0 top-0 h-full w-1/3"
           />
         </>

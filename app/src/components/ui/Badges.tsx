@@ -15,7 +15,7 @@ export function CertifiedTag() {
 
 export function CertifiedAnnonceTag() {
   return (
-    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-certified">
       <ShieldCheck size={16} />
       Annonce certifiée
     </span>
@@ -24,8 +24,8 @@ export function CertifiedAnnonceTag() {
 
 export function AvailableTag() {
   return (
-    <span className="inline-flex items-center rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary">
-      Disponible immédiatement
+    <span className="inline-flex items-center rounded-full bg-success-light px-3 py-1 text-xs font-semibold text-success">
+      Disponible
     </span>
   )
 }

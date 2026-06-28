@@ -57,8 +57,7 @@ export default function Feed() {
           </button>
         </header>
 
-        {/* Contenu du feed centré en 680px */}
-        <main className="mx-auto w-full max-w-feed" aria-label="Fil d'annonces">
+        <main className="w-full" aria-label="Fil d'annonces">
           <Composer />
           <CategoryStrip />
           {/* Pages suggérées en ligne sur mobile/tablette uniquement */}

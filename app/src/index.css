@@ -28,17 +28,17 @@
            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-dark h-13 px-5;
+    @apply btn bg-primary text-white hover:bg-primary-dark rounded-lg h-11 px-4;
   }
   .btn-outline {
-    @apply btn border border-primary text-primary hover:bg-primary-light h-13 px-5;
+    @apply btn border border-line bg-white text-primary hover:bg-soft rounded-lg h-11 px-4;
   }
   .btn-ghost {
-    @apply btn text-ink hover:bg-soft h-11 px-3;
+    @apply btn text-ink hover:bg-soft rounded-full h-10 px-3;
   }
 
   .field {
-    @apply flex items-center gap-3 rounded-xl bg-soft px-4 h-14 text-ink
+    @apply flex items-center gap-3 rounded-full bg-soft px-4 h-11 text-ink
            focus-within:ring-2 focus-within:ring-primary/30;
   }
   .field input {
